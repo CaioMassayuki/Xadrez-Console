@@ -9,13 +9,18 @@ namespace Xadrez_Console.Tabuleiro
 
         public int Rows { get; set; }
         public int Columns { get; set; }
-        private Chessman[,] chessPiece;
+        private Chessman[,] chessPieces;
 
         public ChessBoard(int rows, int columns)
         {
             this.Rows = rows;
             this.Columns = columns;
-            chessPiece = new Chessman[rows, columns];
+            chessPieces = new Chessman[rows, columns];
+        }
+
+        public Chessman ChessPiece(int row, int column)
+        {
+            return chessPieces[row, column];
         }
 
     }

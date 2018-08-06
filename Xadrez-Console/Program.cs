@@ -6,13 +6,10 @@ namespace Xadrez_Console
     {
         static void Main(string[] args)
         {
-            Position position;
+            ChessBoard chessBoard = new ChessBoard(8, 8);
+            ConsoleScreen.PrintChessBoard(chessBoard);
 
-            position = new Position(3, 4);
-
-            ChessBoard tab = new ChessBoard(8, 8);
-
-            Console.WriteLine($"Posição: {position}");
+            Console.ReadLine();
         }
     }
 }
