@@ -23,5 +23,11 @@ namespace Xadrez_Console.Tabuleiro
             return chessPieces[row, column];
         }
 
+        public void PrintChessPiece(Chessman chessman, Position position)
+        {
+            chessPieces[position.Row, position.Column] = chessman;
+            chessman.PiecePosition = position;
+        }
+
     }
 }

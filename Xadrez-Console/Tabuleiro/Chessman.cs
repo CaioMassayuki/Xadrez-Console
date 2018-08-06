@@ -14,9 +14,9 @@ namespace Xadrez_Console.Tabuleiro
         public int PieceMoves { get; protected set; }
         public ChessBoard Board { get; protected set; }
 
-        public Chessman(Position position, ChessBoard board, Color color)
+        public Chessman(ChessBoard board, Color color)
         {
-            this.PiecePosition = position;
+            this.PiecePosition = null;
             this.Board = board;
             this.PieceColor = color;
             this.PieceMoves = START_PIECE_MOVES;

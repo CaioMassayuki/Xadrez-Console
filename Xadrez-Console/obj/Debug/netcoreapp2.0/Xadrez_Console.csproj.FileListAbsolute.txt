@@ -1,0 +1,11 @@
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\obj\Debug\netcoreapp2.0\Xadrez_Console.csproj.CoreCompileInputs.cache
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\obj\Debug\netcoreapp2.0\Xadrez_Console.AssemblyInfoInputs.cache
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\obj\Debug\netcoreapp2.0\Xadrez_Console.AssemblyInfo.cs
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\obj\Debug\netcoreapp2.0\Xadrez_Console.csprojAssemblyReference.cache
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\bin\Debug\netcoreapp2.0\Xadrez_Console.deps.json
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\bin\Debug\netcoreapp2.0\Xadrez_Console.runtimeconfig.json
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\bin\Debug\netcoreapp2.0\Xadrez_Console.runtimeconfig.dev.json
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\bin\Debug\netcoreapp2.0\Xadrez_Console.dll
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\bin\Debug\netcoreapp2.0\Xadrez_Console.pdb
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\obj\Debug\netcoreapp2.0\Xadrez_Console.dll
+C:\Caio\estudos\Xadrez-Console\Xadrez-Console\obj\Debug\netcoreapp2.0\Xadrez_Console.pdb

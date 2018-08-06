@@ -670,9 +670,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Caio\\estudos\\Xadrez-Console\\Xadrez-Console\\Xadrez-Console.csproj",
-      "projectName": "Xadrez-Console",
-      "projectPath": "C:\\Caio\\estudos\\Xadrez-Console\\Xadrez-Console\\Xadrez-Console.csproj",
+      "projectUniqueName": "C:\\Caio\\estudos\\Xadrez-Console\\Xadrez-Console\\Xadrez_Console.csproj",
+      "projectName": "Xadrez_Console",
+      "projectPath": "C:\\Caio\\estudos\\Xadrez-Console\\Xadrez-Console\\Xadrez_Console.csproj",
       "packagesPath": "C:\\Users\\caio.yamashiro\\.nuget\\packages\\",
       "outputPath": "C:\\Caio\\estudos\\Xadrez-Console\\Xadrez-Console\\obj\\",
       "projectStyle": "PackageReference",
