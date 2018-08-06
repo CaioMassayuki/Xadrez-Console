@@ -9,6 +9,10 @@ namespace Xadrez_Console
             Position position;
 
             position = new Position(3, 4);
+
+            ChessBoard tab = new ChessBoard(8, 8);
+
+            Console.WriteLine($"Posição: {position}");
         }
     }
 }
