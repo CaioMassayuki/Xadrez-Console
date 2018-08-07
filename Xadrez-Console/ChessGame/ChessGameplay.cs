@@ -12,6 +12,8 @@ namespace ChessGame
         public int Round { get; private set; }
         public Color CurrentPlayer { get; private set; }
         public bool End { get; private set; }
+        private HashSet<Chessman> Chessmans;
+        private HashSet<Chessman> CapturedChessman;
 
         public ChessGameplay()
         {
@@ -19,6 +21,8 @@ namespace ChessGame
             Round = 1;
             CurrentPlayer = Color.White;
             End = false;
+            Chessmans = new HashSet<Chessman>();
+            CapturedChessman = new HashSet<Chessman>();
             PutChessmans();
         }
 
@@ -28,6 +32,10 @@ namespace ChessGame
             chessman.IncreasePieceMoves();
             Chessman caughtChessman = Board.RemoveChessPiece(destiny);
             Board.PutChessPiece(chessman, destiny);
+            if(caughtChessman != null)
+            {
+                CapturedChessman.Add(caughtChessman);
+            }
         }
 
         public void PerformPlay(Position origin, Position destiny)
@@ -71,13 +79,47 @@ namespace ChessGame
             }
         }
 
+        public HashSet<Chessman> CapturedChessmans(Color color)
+        {
+            HashSet<Chessman> capturedChessman = new HashSet<Chessman>();
+            foreach(Chessman chessman in CapturedChessman)
+            {
+                if(chessman.PieceColor == color)
+                {
+                    capturedChessman.Add(chessman);
+                }
+            }
+            return capturedChessman;
+        }
+
+        public HashSet<Chessman> InGameChessmans(Color color)
+        {
+            HashSet<Chessman> capturedChessman = new HashSet<Chessman>();
+            foreach (Chessman chessman in Chessmans)
+            {
+                if (chessman.PieceColor == color)
+                {
+                    capturedChessman.Add(chessman);
+                }
+            }
+            capturedChessman.ExceptWith(CapturedChessmans(color));
+            return capturedChessman;
+        }
+
+        public void PutNewChessman(char column, int row, Chessman chessman)
+        {
+            Board.PutChessPiece(chessman, new ChessBoardPositioning(column, row).toPosition());
+            Chessmans.Add(chessman);
+        }
+
         private void PutChessmans()
         {
-            Board.PutChessPiece(new Tower(Board, Color.White), new ChessBoardPositioning('a', 1).toPosition());
-            Board.PutChessPiece(new Tower(Board, Color.White), new ChessBoardPositioning('h', 1).toPosition());
+            PutNewChessman('a', 1, new Tower(Board, Color.White));
+            PutNewChessman('h', 1, new Tower(Board, Color.White));
 
-            Board.PutChessPiece(new Tower(Board, Color.Black), new ChessBoardPositioning('a', 8).toPosition());
-            Board.PutChessPiece(new Tower(Board, Color.Black), new ChessBoardPositioning('h', 8).toPosition());
+            PutNewChessman('a', 8, new Tower(Board, Color.Black));
+            PutNewChessman('h', 8, new Tower(Board, Color.Black));
+
         }
 
     }
