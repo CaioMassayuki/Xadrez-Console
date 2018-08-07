@@ -29,12 +29,15 @@ namespace Tabuleiro
 
         public void PrintChessPiece(Chessman chessman, Position position)
         {
-            if(chessmanExists)
+            if (chessmanAlreadyExists(position))
+            {
+                throw new ChessBoardException("Já existe uma peça nessa posição!");
+            }
             chessPieces[position.Row, position.Column] = chessman;
             chessman.PiecePosition = position;
         }
 
-        public bool chessmanAlredyExists(Position position)
+        public bool chessmanAlreadyExists(Position position)
         {
             validatePosition(position);
             return ChessPiece(position) != null;
