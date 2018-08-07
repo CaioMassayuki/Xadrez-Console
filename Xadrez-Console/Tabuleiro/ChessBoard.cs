@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Xadrez_Console.Tabuleiro
+namespace Tabuleiro
 {
     public class ChessBoard
     {
@@ -22,11 +22,39 @@ namespace Xadrez_Console.Tabuleiro
         {
             return chessPieces[row, column];
         }
+        public Chessman ChessPiece(Position position)
+        {
+            return chessPieces[position.Row, position.Column];
+        }
 
         public void PrintChessPiece(Chessman chessman, Position position)
         {
+            if(chessmanExists)
             chessPieces[position.Row, position.Column] = chessman;
             chessman.PiecePosition = position;
+        }
+
+        public bool chessmanAlredyExists(Position position)
+        {
+            validatePosition(position);
+            return ChessPiece(position) != null;
+        }
+
+        public bool validatePosition(Position position)
+        {
+            if(position.Row<0 || position.Row>=Rows || position.Column < 0 || position.Column >= Columns)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void positionExceptionThrower(Position position)
+        {
+            if (!validatePosition(position))
+            {
+                throw new ChessBoardException("Posição inválida!");
+            }
         }
 
     }
