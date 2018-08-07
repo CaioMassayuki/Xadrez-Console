@@ -9,8 +9,8 @@ namespace ChessGame
     {
 
         public ChessBoard Board { get; private set; }
-        private int Round;
-        private Color CurrentPlayer;
+        public int Round { get; private set; }
+        public Color CurrentPlayer { get; private set; }
         public bool End { get; private set; }
 
         public ChessGameplay()
@@ -28,6 +28,47 @@ namespace ChessGame
             chessman.IncreasePieceMoves();
             Chessman caughtChessman = Board.RemoveChessPiece(destiny);
             Board.PutChessPiece(chessman, destiny);
+        }
+
+        public void PerformPlay(Position origin, Position destiny)
+        {
+            ExecuteMovement(origin, destiny);
+            Round++;
+            ChangePlayer();
+        }
+
+        public void OriginPositionValidation(Position position)
+        {
+            if(Board.ChessPiece(position) == null)
+            {
+                throw new ChessBoardException("Não existe peça na posição de origem escolhida!");
+            }
+            if (CurrentPlayer != Board.ChessPiece(position).PieceColor)
+            {
+                throw new ChessBoardException("A peça de origem escolhida não é sua!");
+            }
+            if (!Board.ChessPiece(position).PossibleMovementsExists())
+            {
+                throw new ChessBoardException("Não há movimentos possíveis para a peça de origem escolhida!");
+            }
+        }
+        public void DestinyPositionValidation(Position origin, Position destiny)
+        {
+            if (!Board.ChessPiece(origin).CanMoveTo(destiny))
+            {
+                throw new ChessBoardException("Posição de Destino inválida!");
+            }
+        }
+        private void ChangePlayer()
+        {
+            if(CurrentPlayer == Color.White)
+            {
+                CurrentPlayer = Color.Black;
+            }
+            else
+            {
+                CurrentPlayer = Color.White;
+            }
         }
 
         private void PutChessmans()

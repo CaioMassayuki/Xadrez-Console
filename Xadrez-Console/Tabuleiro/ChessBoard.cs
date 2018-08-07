@@ -9,22 +9,22 @@ namespace Tabuleiro
 
         public int Rows { get; set; }
         public int Columns { get; set; }
-        private Chessman[,] chessPieces;
+        private Chessman[,] ChessPieces;
 
         public ChessBoard(int rows, int columns)
         {
             this.Rows = rows;
             this.Columns = columns;
-            chessPieces = new Chessman[rows, columns];
+            ChessPieces = new Chessman[rows, columns];
         }
 
         public Chessman ChessPiece(int row, int column)
         {
-            return chessPieces[row, column];
+            return ChessPieces[row, column];
         }
         public Chessman ChessPiece(Position position)
         {
-            return chessPieces[position.Row, position.Column];
+            return ChessPieces[position.Row, position.Column];
         }
 
         public void PutChessPiece(Chessman chessman, Position position)
@@ -33,7 +33,7 @@ namespace Tabuleiro
             {
                 throw new ChessBoardException("Já existe uma peça nessa posição!");
             }
-            chessPieces[position.Row, position.Column] = chessman;
+            ChessPieces[position.Row, position.Column] = chessman;
             chessman.PiecePosition = position;
         }
 
@@ -45,7 +45,7 @@ namespace Tabuleiro
             }
             Chessman chessman = ChessPiece(position);
             chessman.PiecePosition = null;
-            chessPieces[position.Row, position.Column] = null;
+            ChessPieces[position.Row, position.Column] = null;
             return chessman;
         }
 
