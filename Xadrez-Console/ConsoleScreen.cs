@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Tabuleiro;
+using ChessGame;
 
 namespace Xadrez_Console
 {
@@ -20,7 +21,7 @@ namespace Xadrez_Console
                     }
                     else
                     {
-                        printChessman(chessBoard.ChessPiece(row, column));
+                        PrintChessman(chessBoard.ChessPiece(row, column));
                         Console.Write(" ");
                     }
 
@@ -30,7 +31,15 @@ namespace Xadrez_Console
             Console.WriteLine("  a b c d e f g h");
         }
 
-        public static void printChessman(Chessman chessman)
+        public static ChessBoardPositioning ReadChessPosition()
+        {
+            string s = Console.ReadLine();
+            char column = s[0];
+            int row = int.Parse($"{s[1]}");
+            return new ChessBoardPositioning(column, row);
+        }
+
+        public static void PrintChessman(Chessman chessman)
         {
             if(chessman.PieceColor == Color.White)
             {

@@ -22,5 +22,10 @@ namespace Tabuleiro
             this.PieceMoves = START_PIECE_MOVES;
         }
 
+        public void IncreasePieceMoves()
+        {
+            PieceMoves++;
+        }
+
     }
 }

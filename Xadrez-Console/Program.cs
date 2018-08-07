@@ -4,22 +4,28 @@ using ChessGame;
 
 namespace Xadrez_Console
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             try
             {
-                ChessBoard chessBoard = new ChessBoard(8, 8);
+                ChessGameplay chessGameplay = new ChessGameplay();
 
-                chessBoard.PrintChessPiece(new Tower(chessBoard, Color.Black), new Position(0, 0));
-                chessBoard.PrintChessPiece(new Tower(chessBoard, Color.Black), new Position(1, 3));
-                chessBoard.PrintChessPiece(new King(chessBoard, Color.Black), new Position(2, 4));
+                while (!chessGameplay.End)
+                {
+                    Console.Clear();
+                    ConsoleScreen.PrintChessBoard(chessGameplay.Board);
 
-                chessBoard.PrintChessPiece(new Tower(chessBoard, Color.White), new Position(5, 3));
-                chessBoard.PrintChessPiece(new King(chessBoard, Color.White), new Position(4, 4));
+                    Console.Write("\nOrigem: ");
+                    Position origin = ConsoleScreen.ReadChessPosition().toPosition();
 
-                ConsoleScreen.PrintChessBoard(chessBoard);
+                    Console.Write("Destino: ");
+                    Position destiny = ConsoleScreen.ReadChessPosition().toPosition();
+
+                    chessGameplay.ExecuteMovement(origin, destiny);
+                }
+
             }
             catch(ChessBoardException e)
             {

@@ -5,12 +5,12 @@ using Tabuleiro;
 
 namespace ChessGame
 {
-    class ChessBoardPositioning
+    public class ChessBoardPositioning
     {
         public char Column { get; set; }
-        public char Row { get; set; }
+        public int Row { get; set; }
 
-        public ChessBoardPositioning(char Column, char Row)
+        public ChessBoardPositioning(char Column, int Row)
         {
             this.Column = Column;
             this.Row = Row;

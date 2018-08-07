@@ -27,9 +27,9 @@ namespace Tabuleiro
             return chessPieces[position.Row, position.Column];
         }
 
-        public void PrintChessPiece(Chessman chessman, Position position)
+        public void PutChessPiece(Chessman chessman, Position position)
         {
-            if (chessmanAlreadyExists(position))
+            if (ChessmanAlreadyExists(position))
             {
                 throw new ChessBoardException("Já existe uma peça nessa posição!");
             }
@@ -37,13 +37,25 @@ namespace Tabuleiro
             chessman.PiecePosition = position;
         }
 
-        public bool chessmanAlreadyExists(Position position)
+        public Chessman RemoveChessPiece(Position position)
         {
-            validatePosition(position);
+            if(ChessPiece(position) == null)
+            {
+                return null;
+            }
+            Chessman chessman = ChessPiece(position);
+            chessman.PiecePosition = null;
+            chessPieces[position.Row, position.Column] = null;
+            return chessman;
+        }
+
+        public bool ChessmanAlreadyExists(Position position)
+        {
+            ValidatePosition(position);
             return ChessPiece(position) != null;
         }
 
-        public bool validatePosition(Position position)
+        public bool ValidatePosition(Position position)
         {
             if(position.Row<0 || position.Row>=Rows || position.Column < 0 || position.Column >= Columns)
             {
@@ -52,9 +64,9 @@ namespace Tabuleiro
             return true;
         }
 
-        public void positionExceptionThrower(Position position)
+        public void PositionExceptionThrower(Position position)
         {
-            if (!validatePosition(position))
+            if (!ValidatePosition(position))
             {
                 throw new ChessBoardException("Posição inválida!");
             }
