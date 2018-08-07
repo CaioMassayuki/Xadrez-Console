@@ -15,16 +15,32 @@ namespace Xadrez_Console
                 Console.Write($"{8 - row} ");
                 for(int column=0; column<chessBoard.Columns; column++)
                 {
-                    if (chessBoard.ChessPiece(row, column) == null)
+                    PrintChessman(chessBoard.ChessPiece(row, column));
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("  a b c d e f g h");
+        }
+        public static void PrintChessBoard(ChessBoard chessBoard, bool[,] possiblePositions)
+        {
+            ConsoleColor standardBackground = Console.BackgroundColor;
+            ConsoleColor markBackground = ConsoleColor.DarkGray;
+
+            for (int row = 0; row < chessBoard.Rows; row++)
+            {
+                Console.Write($"{8 - row} ");
+                for (int column = 0; column < chessBoard.Columns; column++)
+                {
+                    if(possiblePositions[row, column])
                     {
-                        Console.Write("- ");
+                        Console.BackgroundColor = markBackground;
                     }
                     else
                     {
-                        PrintChessman(chessBoard.ChessPiece(row, column));
-                        Console.Write(" ");
+                        Console.BackgroundColor = standardBackground;
                     }
-
+                    PrintChessman(chessBoard.ChessPiece(row, column));
+                    Console.BackgroundColor = standardBackground;
                 }
                 Console.WriteLine();
             }
@@ -41,16 +57,24 @@ namespace Xadrez_Console
 
         public static void PrintChessman(Chessman chessman)
         {
-            if(chessman.PieceColor == Color.White)
+            if(chessman == null)
             {
-                Console.Write(chessman);
+                Console.Write("- ");
             }
             else
             {
-                ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(chessman);
-                Console.ForegroundColor = aux;
+                if (chessman.PieceColor == Color.White)
+                {
+                    Console.Write(chessman);
+                }
+                else
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(chessman);
+                    Console.ForegroundColor = aux;
+                }
+                Console.Write(" ");
             }
         }
     }

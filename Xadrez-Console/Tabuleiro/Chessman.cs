@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tabuleiro
 {
-    public class Chessman
+    public abstract class Chessman
     {
         private const int START_PIECE_MOVES = 0;
 
@@ -27,5 +27,6 @@ namespace Tabuleiro
             PieceMoves++;
         }
 
+        public abstract bool[,] PossibleMovements();
     }
 }
