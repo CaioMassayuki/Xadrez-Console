@@ -8,6 +8,30 @@ namespace Xadrez_Console
 {
     public class ConsoleScreen
     {
+        public static void PrintChessPlay(ChessGameplay chessGameplay)
+        {
+            PrintChessBoard(chessGameplay.Board);
+            PrintCapturedChessman(chessGameplay);
+            Console.WriteLine($"Turno: {chessGameplay.Round}");
+            Console.WriteLine($"Aguardando jogada: {chessGameplay.CurrentPlayer}");
+        }
+        public static void PrintCapturedChessman(ChessGameplay chessGameplay)
+        {
+            Console.WriteLine("Peças capturadas: ");
+            Console.Write("Brancas: ");
+            PrintGroup(chessGameplay.CapturedChessmans(Color.White));
+            Console.Write("Pretas: ");
+            PrintGroup(chessGameplay.CapturedChessmans(Color.Black));
+        }
+        public static void PrintGroup(HashSet<Chessman> chessGroup)
+        {
+            Console.Write("[");
+            foreach (Chessman piece in chessGroup)
+            {
+                Console.Write($"{piece} ");
+            }
+            Console.Write("] ");
+        }
         public static void PrintChessBoard(ChessBoard chessBoard)
         {
             for(int row = 0; row<chessBoard.Rows; row++)

@@ -25,7 +25,6 @@ namespace ChessGame
             CapturedChessman = new HashSet<Chessman>();
             PutChessmans();
         }
-
         public void ExecuteMovement(Position origin, Position destiny)
         {
             Chessman chessman = Board.RemoveChessPiece(origin);
@@ -37,14 +36,12 @@ namespace ChessGame
                 CapturedChessman.Add(caughtChessman);
             }
         }
-
         public void PerformPlay(Position origin, Position destiny)
         {
             ExecuteMovement(origin, destiny);
             Round++;
             ChangePlayer();
         }
-
         public void OriginPositionValidation(Position position)
         {
             if(Board.ChessPiece(position) == null)
@@ -78,7 +75,6 @@ namespace ChessGame
                 CurrentPlayer = Color.White;
             }
         }
-
         public HashSet<Chessman> CapturedChessmans(Color color)
         {
             HashSet<Chessman> capturedChessman = new HashSet<Chessman>();
@@ -91,7 +87,6 @@ namespace ChessGame
             }
             return capturedChessman;
         }
-
         public HashSet<Chessman> InGameChessmans(Color color)
         {
             HashSet<Chessman> capturedChessman = new HashSet<Chessman>();
@@ -105,13 +100,11 @@ namespace ChessGame
             capturedChessman.ExceptWith(CapturedChessmans(color));
             return capturedChessman;
         }
-
         public void PutNewChessman(char column, int row, Chessman chessman)
         {
             Board.PutChessPiece(chessman, new ChessBoardPositioning(column, row).toPosition());
             Chessmans.Add(chessman);
         }
-
         private void PutChessmans()
         {
             PutNewChessman('a', 1, new Tower(Board, Color.White));
