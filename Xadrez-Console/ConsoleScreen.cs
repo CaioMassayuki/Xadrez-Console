@@ -14,6 +14,10 @@ namespace Xadrez_Console
             PrintCapturedChessman(chessGameplay);
             Console.WriteLine($"Turno: {chessGameplay.Round}");
             Console.WriteLine($"Aguardando jogada: {chessGameplay.CurrentPlayer}");
+            if (chessGameplay.Xeque)
+            {
+                Console.WriteLine("Xeque!");
+            }
         }
         public static void PrintCapturedChessman(ChessGameplay chessGameplay)
         {
@@ -73,7 +77,6 @@ namespace Xadrez_Console
             }
             Console.WriteLine("  a b c d e f g h");
         }
-
         public static ChessBoardPositioning ReadChessPosition()
         {
             string s = Console.ReadLine();
@@ -81,7 +84,6 @@ namespace Xadrez_Console
             int row = int.Parse($"{s[1]}");
             return new ChessBoardPositioning(column, row);
         }
-
         public static void PrintChessman(Chessman chessman)
         {
             if(chessman == null)

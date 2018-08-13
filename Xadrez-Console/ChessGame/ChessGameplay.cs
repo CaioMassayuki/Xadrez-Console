@@ -68,8 +68,15 @@ namespace ChessGame
                 Xeque = false;
             }
 
-            Round++;
-            ChangePlayer();
+            if (TestXequeMate(Enemy(CurrentPlayer)))
+            {
+                End = true;
+            }
+            else
+            {
+                Round++;
+                ChangePlayer();
+            }
         }
         public void OriginPositionValidation(Position position)
         {
@@ -178,6 +185,35 @@ namespace ChessGame
                 }
             }
             return false;
+        }
+        public bool TestXequeMate(Color color)
+        {
+            if (!IsXequeMate(color))
+            {
+                return false;
+            }
+            foreach(Chessman piece in InGameChessmans(color))
+            {
+                bool[,] possibleMovements = piece.PossibleMovements();
+                for(int row=0; row<Board.Rows; row++)
+                {
+                    for(int column=0; column<Board.Columns; column++)
+                    {
+                        if(possibleMovements[row, column])
+                        {
+                            Position destiny = new Position(row, column);
+                            Chessman capturedChessman = ExecuteMovement(piece.PiecePosition, destiny);
+                            bool testXeque = IsXequeMate(color);
+                            UndoMovement(piece.PiecePosition, destiny, capturedChessman);
+                            if (!testXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
     }
 }
