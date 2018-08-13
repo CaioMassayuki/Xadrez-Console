@@ -14,6 +14,7 @@ namespace ChessGame
         public bool End { get; private set; }
         private HashSet<Chessman> Chessmans;
         private HashSet<Chessman> CapturedChessman;
+        public bool Xeque { get; private set; }
 
         public ChessGameplay()
         {
@@ -23,9 +24,10 @@ namespace ChessGame
             End = false;
             Chessmans = new HashSet<Chessman>();
             CapturedChessman = new HashSet<Chessman>();
+            Xeque = false;
             PutChessmans();
         }
-        public void ExecuteMovement(Position origin, Position destiny)
+        public Chessman ExecuteMovement(Position origin, Position destiny)
         {
             Chessman chessman = Board.RemoveChessPiece(origin);
             chessman.IncreasePieceMoves();
@@ -35,10 +37,37 @@ namespace ChessGame
             {
                 CapturedChessman.Add(caughtChessman);
             }
+            return caughtChessman; 
+        }
+
+        public void UndoMovement(Position origin, Position destiny, Chessman caughtChessman)
+        {
+            Chessman piece = Board.RemoveChessPiece(destiny);
+            piece.DecreasePieceMoves();
+            if(caughtChessman != null)
+            {
+                Board.PutChessPiece(caughtChessman, destiny);
+                CapturedChessman.Remove(caughtChessman);
+            }
+            Board.PutChessPiece(piece, origin);
         }
         public void PerformPlay(Position origin, Position destiny)
         {
-            ExecuteMovement(origin, destiny);
+            Chessman caughtChessman = ExecuteMovement(origin, destiny);
+            if (IsXequeMate(CurrentPlayer))
+            {
+                UndoMovement(origin, destiny, caughtChessman);
+                throw new ChessBoardException("Você não pode se colocar em xeque!");
+            }
+            if (IsXequeMate(Enemy(CurrentPlayer)))
+            {
+                Xeque = true;
+            }
+            else
+            {
+                Xeque = false;
+            }
+
             Round++;
             ChangePlayer();
         }
@@ -114,6 +143,41 @@ namespace ChessGame
             PutNewChessman('h', 8, new Tower(Board, Color.Black));
 
         }
+        private Color Enemy(Color color)
+        {
+            if(color == Color.White)
+            {
+                return Color.Black;
+            }
+            else
+            {
+                return Color.White; 
+            }
+        }
+        private Chessman KingCheck(Color color)
+        {
+            foreach(Chessman piece in InGameChessmans(color))
+            {
+                if(piece is King)
+                {
+                    return piece;
+                }
+            }
+            return null;
+        }
+        public bool IsXequeMate(Color color)
+        {
+            Chessman king = KingCheck(color);
 
+            foreach (Chessman piece in InGameChessmans(Enemy(color)))
+            {
+                bool[,] possibleMovements = piece.PossibleMovements();
+                if(possibleMovements[king.PiecePosition.Row, king.PiecePosition.Column])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -26,7 +26,10 @@ namespace Tabuleiro
         {
             PieceMoves++;
         }
-
+        public void DecreasePieceMoves()
+        {
+            PieceMoves--;
+        }
         public bool PossibleMovementsExists()
         {
             bool[,] possibleMovements = PossibleMovements();

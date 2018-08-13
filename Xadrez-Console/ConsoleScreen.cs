@@ -21,7 +21,10 @@ namespace Xadrez_Console
             Console.Write("Brancas: ");
             PrintGroup(chessGameplay.CapturedChessmans(Color.White));
             Console.Write("Pretas: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             PrintGroup(chessGameplay.CapturedChessmans(Color.Black));
+            Console.ForegroundColor = aux;
         }
         public static void PrintGroup(HashSet<Chessman> chessGroup)
         {
