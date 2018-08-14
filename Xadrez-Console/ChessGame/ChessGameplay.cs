@@ -201,10 +201,11 @@ namespace ChessGame
                     {
                         if(possibleMovements[row, column])
                         {
+                            Position origin = piece.PiecePosition;
                             Position destiny = new Position(row, column);
-                            Chessman capturedChessman = ExecuteMovement(piece.PiecePosition, destiny);
+                            Chessman capturedChessman = ExecuteMovement(origin, destiny);
                             bool testXeque = IsXequeMate(color);
-                            UndoMovement(piece.PiecePosition, destiny, capturedChessman);
+                            UndoMovement(origin, destiny, capturedChessman);
                             if (!testXeque)
                             {
                                 return false;

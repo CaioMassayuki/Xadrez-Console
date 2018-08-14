@@ -13,10 +13,18 @@ namespace Xadrez_Console
             PrintChessBoard(chessGameplay.Board);
             PrintCapturedChessman(chessGameplay);
             Console.WriteLine($"Turno: {chessGameplay.Round}");
-            Console.WriteLine($"Aguardando jogada: {chessGameplay.CurrentPlayer}");
-            if (chessGameplay.Xeque)
+            if (!chessGameplay.End)
             {
-                Console.WriteLine("Xeque!");
+                Console.WriteLine($"Aguardando jogada: {chessGameplay.CurrentPlayer}");
+                if (chessGameplay.Xeque)
+                {
+                    Console.WriteLine("Xeque!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine($"Vencedor: {chessGameplay.CurrentPlayer}");
             }
         }
         public static void PrintCapturedChessman(ChessGameplay chessGameplay)
